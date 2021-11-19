@@ -34,14 +34,17 @@ client.on("messageCreate", async message => {
     console.log(`message sent`);
     console.log(args);
     if(args[0] == 'fetch') {
+        message.channel.send("fetching...");
         await fetchMenu.execute();
+        message.channel.send("fetched! you can now run menu/print");
         
-        message.channel.send("Fetching");
     } 
     if(args[0] == 'print') {
         let output =  fetchMenu.getMenu();
         console.log(output);
+
     }
+    
 })
 
 

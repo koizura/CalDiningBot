@@ -1,7 +1,7 @@
 const jsdom = require("jsdom");
 const { getDocumentTypeNodePublicId } = require("parse5/lib/tree-adapters/default");
 const { JSDOM } = jsdom;
-const fetch = import('node-fetch');
+// const fetch = import('node-fetch');
 const url = "https://caldining.berkeley.edu/menus/";
 
 let lastUpdated = Date.now();
@@ -31,41 +31,36 @@ module.exports = {
         lastUpdated = Date.now();
 
 
-        await fetch(url)
-        .then(function (response) {
-            switch (response.status) {
-                // status "OK"
-                case 200:
-                    return response.text();
-                // status "Not Found"
-                case 404:
-                    throw response;
-            }
-        })
-        .then(function (template) {
-            console.log("fetched data");
-            parseHTML(template);
-            return true;
-        })
-        .catch(function (response) {
-            // "Not Found"
-            console.log(response.statusText);
-            return false;
+        await JSDOM.fromURL(url).then(dom => {
+            // console.log(dom.serialize());
+            parseHTML(dom.serialize());
         });
     },
     getMenu() {
         return menu;
     },
+    async test() {
+        
+    },
 };
 
-function parseHTML() {
+function parseHTML(html) {
     const names = Object.keys(menu);
     const times = Object.keys(Q_TIME);
-    const dom = new JSDOM(template);
+    const dom = new JSDOM(html);
 
     names.forEach(name => {
         times.forEach(time => {
-            const data = dom.window.document.querySelector(Q_NAME[name] + ' ' + Q_TIME[time]).querySelectorAll(".recip > span");
+            console.log(name + ", " +  time);
+            let data = []
+            try {
+                data = dom.window.document.querySelector(Q_NAME[name] + ' ' + Q_TIME[time]).querySelectorAll(".recip > span") 
+            } catch (err) { 
+                // error! couldn't find menu for this specific time/name
+            };
+
+            
+                
             let menuItems = [];
             data.forEach(element => {
                 if(element.className == "") {

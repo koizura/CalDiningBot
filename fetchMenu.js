@@ -4,7 +4,7 @@ const { JSDOM } = jsdom;
 // const fetch = import('node-fetch');
 const url = "https://caldining.berkeley.edu/menus/";
 
-let lastUpdated = Date.now();
+let lastUpdatedDay = -1;
 
 let menu = {
     crossroads: {},
@@ -26,18 +26,24 @@ const Q_TIME = {
 };
 
 module.exports = {
-	async execute() {
-        let timeSinceLastCall = "it's been " + (Date.now()-lastUpdated)/1000 + " seconds since last call";
-        lastUpdated = Date.now();
-
+	async update() {
+        
+        lastUpdatedDay = new Date(Date.now()).getDate();
 
         await JSDOM.fromURL(url).then(dom => {
             // console.log(dom.serialize());
             parseHTML(dom.serialize());
+            return menu;
         });
     },
-    getMenu() {
-        return menu;
+    async getMenu() {
+        
+        if (lastUpdatedDay == new Date(Date.now()).getDate()) {
+            return menu;
+        } 
+        else { // must update first!!
+            return await this.update();
+        }
     },
     async test() {
         
@@ -51,7 +57,6 @@ function parseHTML(html) {
 
     names.forEach(name => {
         times.forEach(time => {
-            console.log(name + ", " +  time);
             let data = []
             try {
                 data = dom.window.document.querySelector(Q_NAME[name] + ' ' + Q_TIME[time]).querySelectorAll(".recip > span") 
@@ -64,9 +69,11 @@ function parseHTML(html) {
             let menuItems = [];
             data.forEach(element => {
                 if(element.className == "") {
-                    menuItems += [element.innerHTML];
+                    menuItems.push(element.innerHTML);
                 }
+                
             });
+            
             menu[name][time] = menuItems;
         });
         

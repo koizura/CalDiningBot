@@ -34,17 +34,136 @@ client.on("messageCreate", async message => {
     console.log(`message sent`);
     console.log(args);
     if(args[0] == 'fetch') {
-        message.channel.send("fetching...");
-        await fetchMenu.execute();
-        message.channel.send("fetched! you can now run menu/print");
+        message.channel.send("force fetching new data...");
+        await fetchMenu.update();
+        message.channel.send("data has been updated!");
         
     } 
     if(args[0] == 'print') {
-        let output =  fetchMenu.getMenu();
+        let output = await fetchMenu.getMenu();
         console.log(output);
 
     }
-    
+    if(args[0] == 'croads' && args[1] == 'lunch') {
+        await fetchMenu.getMenu();
+        let data = (await fetchMenu.getMenu()).crossroads.lunch;
+        
+        let output = "**Crossroads Lunch Menu:**";
+        for(let i = 0; i < data.length; i++ ) {
+            output += "\n" + data[i];
+        }
+        message.channel.send(output);
+    }
+    if(args[0] == 'croads' && args[1] == 'dinner') {
+        await fetchMenu.getMenu();
+        let data = (await fetchMenu.getMenu()).crossroads.dinner;
+        
+        let output = "**Crossroads Dinner Menu:**";
+        for(let i = 0; i < data.length; i++ ) {
+            output += "\n" + data[i];
+        }
+        message.channel.send(output);
+    }
+    if(args[0] == 'croads' && args[1] == 'breakfast') {
+        await fetchMenu.getMenu();
+        let data = (await fetchMenu.getMenu()).crossroads.breakfast;
+        
+        let output = "**Crossroads Breakfast Menu:**";
+        for(let i = 0; i < data.length; i++ ) {
+            output += "\n" + data[i];
+        }
+        message.channel.send(output);
+    }
+    if(args[0] == 'foothill' && args[1] == 'lunch') {
+        await fetchMenu.getMenu();
+        let data = (await fetchMenu.getMenu()).foothill.lunch;
+        
+        let output = "**Foothill Lunch Menu:**";
+        for(let i = 0; i < data.length; i++ ) {
+            output += "\n" + data[i];
+        }
+        message.channel.send(output);
+    }
+    if(args[0] == 'foothill' && args[1] == 'dinner') {
+        await fetchMenu.getMenu();
+        let data = (await fetchMenu.getMenu()).foothill.dinner;
+        
+        let output = "**Foothill Dinner Menu:**";
+        for(let i = 0; i < data.length; i++ ) {
+            output += "\n" + data[i];
+        }
+        message.channel.send(output);
+    }
+    if(args[0] == 'foothill' && args[1] == 'breakfast') {
+        await fetchMenu.getMenu();
+        let data = (await fetchMenu.getMenu()).foothill.breakfast;
+        
+        let output = "**Foothill Breakfast Menu:**";
+        for(let i = 0; i < data.length; i++ ) {
+            output += "\n" + data[i];
+        }
+        message.channel.send(output);
+    }
+    if(args[0] == 'cafe3' && args[1] == 'lunch') {
+        await fetchMenu.getMenu();
+        let data = (await fetchMenu.getMenu()).cafe3.lunch;
+        
+        let output = "**Cafe 3 Lunch Menu:**";
+        for(let i = 0; i < data.length; i++ ) {
+            output += "\n" + data[i];
+        }
+        message.channel.send(output);
+    }
+    if(args[0] == 'cafe3' && args[1] == 'dinner') {
+        await fetchMenu.getMenu();
+        let data = (await fetchMenu.getMenu()).cafe3.dinner;
+        
+        let output = "**Cafe 3 Dinner Menu:**";
+        for(let i = 0; i < data.length; i++ ) {
+            output += "\n" + data[i];
+        }
+        message.channel.send(output);
+    }
+    if(args[0] == 'cafe3' && args[1] == 'breakfast') {
+        await fetchMenu.getMenu();
+        let data = (await fetchMenu.getMenu()).cafe3.breakfast;
+        
+        let output = "**Cafe 3 Breakfast Menu:**";
+        for(let i = 0; i < data.length; i++ ) {
+            output += "\n" + data[i];
+        }
+        message.channel.send(output);
+    }
+    if(args[0] == 'clarkkerr' && args[1] == 'lunch') {
+        await fetchMenu.getMenu();
+        let data = (await fetchMenu.getMenu()).clarkkerr.lunch;
+        
+        let output = "**Clark Kerr Lunch Menu:**";
+        for(let i = 0; i < data.length; i++ ) {
+            output += "\n" + data[i];
+        }
+        message.channel.send(output);
+    }
+    if(args[0] == 'clarkkerr' && args[1] == 'dinner') {
+        await fetchMenu.getMenu();
+        let data = (await fetchMenu.getMenu()).clarkkerr.dinner;
+        
+        let output = "**Clark Kerr Dinner Menu:**";
+        for(let i = 0; i < data.length; i++ ) {
+            output += "\n" + data[i];
+        }
+        message.channel.send(output);
+    }
+    if(args[0] == 'clarkkerr' && args[1] == 'breakfast') {
+        await fetchMenu.getMenu();
+        let data = (await fetchMenu.getMenu()).clarkkerr.breakfast;
+        
+        let output = "**Clark Kerr Breakfast Menu:**";
+        for(let i = 0; i < data.length; i++ ) {
+            output += "\n" + data[i];
+        }
+        message.channel.send(output);
+    }
 })
 
 

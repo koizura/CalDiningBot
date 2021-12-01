@@ -14,9 +14,9 @@ let menu = {
 };
 const Q_NAME = {
     crossroads: ".location-name.Crossroads",
-    foothill: "location-name.Foothill",
+    foothill: ".location-name.Foothill",
     cafe3: ".location-name.Cafe_3",
-    clarkkerr: "location-name.Clark_Kerr_Campus",
+    clarkkerr: ".location-name.Clark_Kerr_Campus",
 };
 const Q_TIME = {
     breakfast: ".preiod-name.Breakfast",

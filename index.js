@@ -25,6 +25,7 @@ for (const file of commandFiles) {
 
 client.on("ready", () => {
     console.log(`Ready! Logged in as ${client.user.tag}`);
+    client.user.setActivity('to menu/help', { type: 'LISTENING' });
 });
 client.on("messageCreate", async message => {
     if(message.author.bot) return;

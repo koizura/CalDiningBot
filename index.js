@@ -53,6 +53,11 @@ client.on("messageCreate", async message => {
                     + "\nCreated by chicken#3413";
         message.channel.send(output);
     }
+    if(args[0] == "invite") {
+        let output = "Invite me to your server with"
+                    + "\nhttps://discord.com/oauth2/authorize?client_id=911100218680934451&permissions=0&scope=bot%20applications.commands";
+        message.channel.send(output);
+    }
     if(args[0] == 'croads' && args[1] == 'lunch') {
         await fetchMenu.getMenu();
         let data = (await fetchMenu.getMenu()).crossroads.lunch;

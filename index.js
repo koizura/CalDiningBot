@@ -44,6 +44,12 @@ client.on("messageCreate", async message => {
         console.log(output);
 
     }
+    if(args[0] == "help") {
+        let output = "usage: `menu/<dininghallname> <time>`"
+                    + "\nDining halls: `croads` `cafe3` `clarkkerr` `foothill`"
+                    + "\nTimes: `breakfast` `lunch` `dinner`";
+        message.channel.send(output);
+    }
     if(args[0] == 'croads' && args[1] == 'lunch') {
         await fetchMenu.getMenu();
         let data = (await fetchMenu.getMenu()).crossroads.lunch;

@@ -29,7 +29,13 @@ client.on("ready", () => {
 });
 client.on("messageCreate", async message => {
     if(message.author.bot) return;
+    if(message.content.toLocaleLowerCase().search("ruff ruff") != -1) {
+        console.log("Ruff Ruff");
+
+    }
     if (!message.content.startsWith(config.prefix)) return;
+    
+
     const args = message.content.slice(config.prefix.length).trim().split(/ +/);
 
     console.log(`message sent`);

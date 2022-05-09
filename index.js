@@ -29,9 +29,9 @@ client.on("ready", () => {
 });
 client.on("messageCreate", async message => {
     if(message.author.bot) return;
-    if(message.content.toLocaleLowerCase().search("ruff ruff") != -1) {
+    if(message.content.toLocaleLowerCase().search("ruff ruff") != -1 && message.guildId == "956676648881766440") {
         console.log("Ruff Ruff");
-
+        message.react('💀');
     }
     if (!message.content.startsWith(config.prefix)) return;
     

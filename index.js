@@ -33,6 +33,13 @@ client.on("messageCreate", async message => {
         console.log("Ruff Ruff");
         message.react('💀');
     }
+    if(message.content.toLocaleLowerCase().search("nyaa") != -1 && message.guildId == "956676648881766440") {
+        console.log("nyaa");
+        message.react('🥶');
+    }
+    if(message.author.id == "1002281201517744250") {
+        message.react('<a:femboy:1002282107369955418>');
+    }
     if (!message.content.startsWith(config.prefix)) return;
     
 

@@ -37,7 +37,7 @@ client.on("messageCreate", async message => {
         console.log("nyaa");
         message.react('🥶');
     }
-    if(message.author.id == "1002281201517744250") {
+    if(message.author.user.id == "1002281201517744250") {
         message.react('<a:femboy:1002282107369955418>');
     }
     if (!message.content.startsWith(config.prefix)) return;

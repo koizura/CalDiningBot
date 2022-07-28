@@ -37,8 +37,8 @@ client.on("messageCreate", async message => {
         console.log("nyaa");
         message.react('🥶');
     }
-    if(message.author.id == "201803334594592769") {
-        message.react('<a:femboy:1002282107369955418>');
+    if(message.author.id == "201803334594592769" && message.guildId == "956676648881766440" && Math.random() > 0.9) {
+        message.react('🏳️‍⚧️');
     }
     if (!message.content.startsWith(config.prefix)) return;
     

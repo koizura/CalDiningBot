@@ -28,6 +28,7 @@ client.on("ready", () => {
     client.user.setActivity('to menu/help', { type: 'LISTENING' });
 });
 client.on("messageCreate", async message => {
+
     if(message.author.bot) return;
     if(message.content.toLocaleLowerCase().search("ruff ruff") != -1 && message.guildId == "956676648881766440") {
         console.log("Ruff Ruff");
@@ -38,7 +39,7 @@ client.on("messageCreate", async message => {
         message.react('🥶');
     }
 
-    if (!message.content.startsWith(config.prefix)) return;
+    if (!message.content.toLowerCase().startsWith(config.prefix)) return;
     
 
     const args = message.content.toLowerCase().slice(config.prefix.length).trim().split(/ +/);

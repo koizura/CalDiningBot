@@ -37,15 +37,7 @@ client.on("messageCreate", async message => {
         console.log("nyaa");
         message.react('🥶');
     }
-    if(message.author.id == "201803334594592769" && message.guildId == "956676648881766440" && Math.random() > 0.97) {
-        
-        if (Math.random() > 0.5) {
-            message.react('🏳️‍⚧️');
-        }
-        else {
-            message.react('🏳️‍🌈');
-        }
-    }
+
     if (!message.content.startsWith(config.prefix)) return;
     
 
@@ -77,6 +69,13 @@ client.on("messageCreate", async message => {
         let output = "Invite me to your server with"
                     + "\nhttps://discord.com/oauth2/authorize?client_id=911100218680934451&permissions=0&scope=bot%20applications.commands";
         message.channel.send(output);
+    }
+    if(args[0] == 'gbc') {
+        message.channel.send({
+            files: [{
+                attachment: './images/gbc_menu.png',
+                name: 'GBC_MENU.png'
+            }]});
     }
     if(args[0] == 'croads' && args[1] == 'lunch') {
         await fetchMenu.getMenu();

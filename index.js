@@ -41,7 +41,7 @@ client.on("messageCreate", async message => {
     if (!message.content.startsWith(config.prefix)) return;
     
 
-    const args = message.content.slice(config.prefix.length).trim().split(/ +/);
+    const args = message.content.toLowerCase().slice(config.prefix.length).trim().split(/ +/);
 
     console.log(`message sent`);
     console.log(args);
@@ -61,6 +61,7 @@ client.on("messageCreate", async message => {
                     + "\n**Dining halls:** `croads` `cafe3` `clarkkerr` `foothill`"
                     + "\n**Times:** `breakfast` `lunch` `dinner`"
                     + "\n**Example:** `menu/cafe3 dinner`"
+                    + "\n**Other:** menu/iHouse, menu/gbc, menu/link, menu/all, menu/invite"
                     + "\nWhen the command is used for the first time in the day, it will take a few seconds to fetch the data."
                     + "\nCreated by chicken#3413";
         message.channel.send(output);
@@ -70,12 +71,18 @@ client.on("messageCreate", async message => {
                     + "\nhttps://discord.com/oauth2/authorize?client_id=911100218680934451&permissions=0&scope=bot%20applications.commands";
         message.channel.send(output);
     }
+    if (args[0] == 'link' || args[0] == 'all') {
+        message.channel.send("here, if you want to check the menu out yourself: https://caldining.berkeley.edu/menus/");
+    }
     if(args[0] == 'gbc') {
         message.channel.send({
             files: [{
                 attachment: './images/gbc_menu.png',
                 name: 'GBC_MENU.png'
             }]});
+    }
+    if(args[0] == 'ihouse') {
+        message.channel.send("PDF for iHouse menu: https://ihouse.berkeley.edu/sites/default/files/menu.pdf");
     }
     if(args[0] == 'croads' && args[1] == 'lunch') {
         await fetchMenu.getMenu();

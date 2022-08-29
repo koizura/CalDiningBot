@@ -28,182 +28,188 @@ client.on("ready", () => {
     client.user.setActivity('to menu/help', { type: 'LISTENING' });
 });
 client.on("messageCreate", async message => {
+    try {
 
-    if(message.author.bot) return;
-    if(message.content.toLocaleLowerCase().search("ruff ruff") != -1 && message.guildId == "956676648881766440") {
-        console.log("Ruff Ruff");
-        message.react('💀');
-    }
-    if(message.content.toLocaleLowerCase().search("nyaa") != -1 && message.guildId == "956676648881766440") {
-        console.log("nyaa");
-        message.react('🥶');
-    }
+        
+        if(message.author.bot) return;
+        if(message.content.toLocaleLowerCase().search("ruff ruff") != -1 && message.guildId == "956676648881766440") {
+            console.log("Ruff Ruff");
+            message.react('💀');
+        }
+        if(message.content.toLocaleLowerCase().search("nyaa") != -1 && message.guildId == "956676648881766440") {
+            console.log("nyaa");
+            message.react('🥶');
+        }
 
-    if (!message.content.toLowerCase().startsWith(config.prefix)) return;
-    
+        if (!message.content.toLowerCase().startsWith(config.prefix)) return;
+        
 
-    const args = message.content.toLowerCase().slice(config.prefix.length).trim().split(/ +/);
+        const args = message.content.toLowerCase().slice(config.prefix.length).trim().split(/ +/);
 
-    console.log(`message sent`);
-    console.log(args);
-    if(args[0] == 'fetch') {
-        message.channel.send("force fetching new data...");
-        await fetchMenu.update();
-        message.channel.send("data has been updated!");
-        
-    } 
-    if(args[0] == 'print') {
-        let output = await fetchMenu.getMenu();
-        console.log(output);
+        console.log(`message sent`);
+        console.log(args);
+        if(args[0] == 'fetch') {
+            message.channel.send("force fetching new data...");
+            await fetchMenu.update();
+            message.channel.send("data has been updated!");
+            
+        } 
+        if(args[0] == 'print') {
+            let output = await fetchMenu.getMenu();
+            console.log(output);
 
-    }
-    if(args[0] == "help") {
-        let output = "**Usage:** `menu/<dininghallname> <time>`"
-                    + "\n**Dining halls:** `croads` `cafe3` `clarkkerr` `foothill`"
-                    + "\n**Times:** `breakfast` `lunch` `dinner`"
-                    + "\n**Example:** `menu/cafe3 dinner`"
-                    + "\n**Other:** `menu/ihouse`, `menu/gbc`, `menu/link`, `menu/all`, `menu/invite`"
-                    + "\nWhen the command is used for the first time in the day, it will take a few seconds to fetch the data."
-                    + "\nCreated by chicken#3413";
-        message.channel.send(output);
-    }
-    if(args[0] == "invite") {
-        let output = "Invite me to your server with"
-                    + "\nhttps://discord.com/oauth2/authorize?client_id=911100218680934451&permissions=0&scope=bot%20applications.commands";
-        message.channel.send(output);
-    }
-    if (args[0] == 'link' || args[0] == 'all') {
-        message.channel.send("here, if you want to check the menu out yourself: https://caldining.berkeley.edu/menus/");
-    }
-    if(args[0] == 'gbc') {
-        message.channel.send({
-            files: [{
-                attachment: './images/gbc_menu.png',
-                name: 'GBC_MENU.png'
-            }]});
-    }
-    if(args[0] == 'ihouse') {
-        message.channel.send("PDF for iHouse menu: https://ihouse.berkeley.edu/sites/default/files/menu.pdf");
-    }
-    if(args[0] == 'croads' && args[1] == 'lunch') {
-        await fetchMenu.getMenu();
-        let data = (await fetchMenu.getMenu()).crossroads.lunch;
-        
-        let output = "**Crossroads Lunch Menu:**";
-        for(let i = 0; i < data.length; i++ ) {
-            output += "\n" + data[i];
         }
-        message.channel.send(output);
-    }
-    if(args[0] == 'croads' && args[1] == 'dinner') {
-        await fetchMenu.getMenu();
-        let data = (await fetchMenu.getMenu()).crossroads.dinner;
-        
-        let output = "**Crossroads Dinner Menu:**";
-        for(let i = 0; i < data.length; i++ ) {
-            output += "\n" + data[i];
+        if(args[0] == "help") {
+            let output = "**Usage:** `menu/<dininghallname> <time>`"
+                        + "\n**Dining halls:** `croads` `cafe3` `clarkkerr` `foothill`"
+                        + "\n**Times:** `breakfast` `lunch` `dinner`"
+                        + "\n**Example:** `menu/cafe3 dinner`"
+                        + "\n**Other:** `menu/ihouse`, `menu/gbc`, `menu/link`, `menu/all`, `menu/invite`"
+                        + "\nWhen the command is used for the first time in the day, it will take a few seconds to fetch the data."
+                        + "\nCreated by chicken#3413";
+            message.channel.send(output);
         }
-        message.channel.send(output);
-    }
-    if(args[0] == 'croads' && args[1] == 'breakfast') {
-        await fetchMenu.getMenu();
-        let data = (await fetchMenu.getMenu()).crossroads.breakfast;
-        
-        let output = "**Crossroads Breakfast Menu:**";
-        for(let i = 0; i < data.length; i++ ) {
-            output += "\n" + data[i];
+        if(args[0] == "invite") {
+            let output = "Invite me to your server with"
+                        + "\nhttps://discord.com/oauth2/authorize?client_id=911100218680934451&permissions=0&scope=bot%20applications.commands";
+            message.channel.send(output);
         }
-        message.channel.send(output);
-    }
-    if(args[0] == 'foothill' && args[1] == 'lunch') {
-        await fetchMenu.getMenu();
-        let data = (await fetchMenu.getMenu()).foothill.lunch;
-        
-        let output = "**Foothill Lunch Menu:**";
-        for(let i = 0; i < data.length; i++ ) {
-            output += "\n" + data[i];
+        if (args[0] == 'link' || args[0] == 'all') {
+            message.channel.send("here, if you want to check the menu out yourself: https://caldining.berkeley.edu/menus/");
         }
-        message.channel.send(output);
-    }
-    if(args[0] == 'foothill' && args[1] == 'dinner') {
-        await fetchMenu.getMenu();
-        let data = (await fetchMenu.getMenu()).foothill.dinner;
-        
-        let output = "**Foothill Dinner Menu:**";
-        for(let i = 0; i < data.length; i++ ) {
-            output += "\n" + data[i];
+        if(args[0] == 'gbc') {
+            message.channel.send({
+                files: [{
+                    attachment: './images/gbc_menu.png',
+                    name: 'GBC_MENU.png'
+                }]});
         }
-        message.channel.send(output);
-    }
-    if(args[0] == 'foothill' && args[1] == 'breakfast') {
-        await fetchMenu.getMenu();
-        let data = (await fetchMenu.getMenu()).foothill.breakfast;
-        
-        let output = "**Foothill Breakfast Menu:**";
-        for(let i = 0; i < data.length; i++ ) {
-            output += "\n" + data[i];
+        if(args[0] == 'ihouse') {
+            message.channel.send("PDF for iHouse menu: https://ihouse.berkeley.edu/sites/default/files/menu.pdf");
         }
-        message.channel.send(output);
-    }
-    if(args[0] == 'cafe3' && args[1] == 'lunch') {
-        await fetchMenu.getMenu();
-        let data = (await fetchMenu.getMenu()).cafe3.lunch;
-        
-        let output = "**Cafe 3 Lunch Menu:**";
-        for(let i = 0; i < data.length; i++ ) {
-            output += "\n" + data[i];
+        if(args[0] == 'croads' && args[1] == 'lunch') {
+            await fetchMenu.getMenu();
+            let data = (await fetchMenu.getMenu()).crossroads.lunch;
+            
+            let output = "**Crossroads Lunch Menu:**";
+            for(let i = 0; i < data.length; i++ ) {
+                output += "\n" + data[i];
+            }
+            message.channel.send(output);
         }
-        message.channel.send(output);
-    }
-    if(args[0] == 'cafe3' && args[1] == 'dinner') {
-        await fetchMenu.getMenu();
-        let data = (await fetchMenu.getMenu()).cafe3.dinner;
-        
-        let output = "**Cafe 3 Dinner Menu:**";
-        for(let i = 0; i < data.length; i++ ) {
-            output += "\n" + data[i];
+        if(args[0] == 'croads' && args[1] == 'dinner') {
+            await fetchMenu.getMenu();
+            let data = (await fetchMenu.getMenu()).crossroads.dinner;
+            
+            let output = "**Crossroads Dinner Menu:**";
+            for(let i = 0; i < data.length; i++ ) {
+                output += "\n" + data[i];
+            }
+            message.channel.send(output);
         }
-        message.channel.send(output);
-    }
-    if(args[0] == 'cafe3' && args[1] == 'breakfast') {
-        await fetchMenu.getMenu();
-        let data = (await fetchMenu.getMenu()).cafe3.breakfast;
-        
-        let output = "**Cafe 3 Breakfast Menu:**";
-        for(let i = 0; i < data.length; i++ ) {
-            output += "\n" + data[i];
+        if(args[0] == 'croads' && args[1] == 'breakfast') {
+            await fetchMenu.getMenu();
+            let data = (await fetchMenu.getMenu()).crossroads.breakfast;
+            
+            let output = "**Crossroads Breakfast Menu:**";
+            for(let i = 0; i < data.length; i++ ) {
+                output += "\n" + data[i];
+            }
+            message.channel.send(output);
         }
-        message.channel.send(output);
-    }
-    if(args[0] == 'clarkkerr' && args[1] == 'lunch') {
-        await fetchMenu.getMenu();
-        let data = (await fetchMenu.getMenu()).clarkkerr.lunch;
-        
-        let output = "**Clark Kerr Lunch Menu:**";
-        for(let i = 0; i < data.length; i++ ) {
-            output += "\n" + data[i];
+        if(args[0] == 'foothill' && args[1] == 'lunch') {
+            await fetchMenu.getMenu();
+            let data = (await fetchMenu.getMenu()).foothill.lunch;
+            
+            let output = "**Foothill Lunch Menu:**";
+            for(let i = 0; i < data.length; i++ ) {
+                output += "\n" + data[i];
+            }
+            message.channel.send(output);
         }
-        message.channel.send(output);
-    }
-    if(args[0] == 'clarkkerr' && args[1] == 'dinner') {
-        await fetchMenu.getMenu();
-        let data = (await fetchMenu.getMenu()).clarkkerr.dinner;
-        
-        let output = "**Clark Kerr Dinner Menu:**";
-        for(let i = 0; i < data.length; i++ ) {
-            output += "\n" + data[i];
+        if(args[0] == 'foothill' && args[1] == 'dinner') {
+            await fetchMenu.getMenu();
+            let data = (await fetchMenu.getMenu()).foothill.dinner;
+            
+            let output = "**Foothill Dinner Menu:**";
+            for(let i = 0; i < data.length; i++ ) {
+                output += "\n" + data[i];
+            }
+            message.channel.send(output);
         }
-        message.channel.send(output);
-    }
-    if(args[0] == 'clarkkerr' && args[1] == 'breakfast') {
-        await fetchMenu.getMenu();
-        let data = (await fetchMenu.getMenu()).clarkkerr.breakfast;
-        
-        let output = "**Clark Kerr Breakfast Menu:**";
-        for(let i = 0; i < data.length; i++ ) {
-            output += "\n" + data[i];
+        if(args[0] == 'foothill' && args[1] == 'breakfast') {
+            await fetchMenu.getMenu();
+            let data = (await fetchMenu.getMenu()).foothill.breakfast;
+            
+            let output = "**Foothill Breakfast Menu:**";
+            for(let i = 0; i < data.length; i++ ) {
+                output += "\n" + data[i];
+            }
+            message.channel.send(output);
         }
-        message.channel.send(output);
+        if(args[0] == 'cafe3' && args[1] == 'lunch') {
+            await fetchMenu.getMenu();
+            let data = (await fetchMenu.getMenu()).cafe3.lunch;
+            
+            let output = "**Cafe 3 Lunch Menu:**";
+            for(let i = 0; i < data.length; i++ ) {
+                output += "\n" + data[i];
+            }
+            message.channel.send(output);
+        }
+        if(args[0] == 'cafe3' && args[1] == 'dinner') {
+            await fetchMenu.getMenu();
+            let data = (await fetchMenu.getMenu()).cafe3.dinner;
+            
+            let output = "**Cafe 3 Dinner Menu:**";
+            for(let i = 0; i < data.length; i++ ) {
+                output += "\n" + data[i];
+            }
+            message.channel.send(output);
+        }
+        if(args[0] == 'cafe3' && args[1] == 'breakfast') {
+            await fetchMenu.getMenu();
+            let data = (await fetchMenu.getMenu()).cafe3.breakfast;
+            
+            let output = "**Cafe 3 Breakfast Menu:**";
+            for(let i = 0; i < data.length; i++ ) {
+                output += "\n" + data[i];
+            }
+            message.channel.send(output);
+        }
+        if(args[0] == 'clarkkerr' && args[1] == 'lunch') {
+            await fetchMenu.getMenu();
+            let data = (await fetchMenu.getMenu()).clarkkerr.lunch;
+            
+            let output = "**Clark Kerr Lunch Menu:**";
+            for(let i = 0; i < data.length; i++ ) {
+                output += "\n" + data[i];
+            }
+            message.channel.send(output);
+        }
+        if(args[0] == 'clarkkerr' && args[1] == 'dinner') {
+            await fetchMenu.getMenu();
+            let data = (await fetchMenu.getMenu()).clarkkerr.dinner;
+            
+            let output = "**Clark Kerr Dinner Menu:**";
+            for(let i = 0; i < data.length; i++ ) {
+                output += "\n" + data[i];
+            }
+            message.channel.send(output);
+        }
+        if(args[0] == 'clarkkerr' && args[1] == 'breakfast') {
+            await fetchMenu.getMenu();
+            let data = (await fetchMenu.getMenu()).clarkkerr.breakfast;
+            
+            let output = "**Clark Kerr Breakfast Menu:**";
+            for(let i = 0; i < data.length; i++ ) {
+                output += "\n" + data[i];
+            }
+            message.channel.send(output);
+        }
+    }
+    catch(err) {
+        console.log("error! \n" + e);
     }
 })
 

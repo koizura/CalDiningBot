@@ -43,7 +43,14 @@ client.on("messageCreate", async message => {
 
         if (!message.content.toLowerCase().startsWith(config.prefix)) return;
         
-
+        if (message.guildId == "956676648881766440" && message.channelId != "965098505620299836") {
+            message.reply('please use <#965098505620299836> for menu commands.')
+                .then(msg => {
+                    setTimeout(() => msg.delete(), 3000)
+                })
+                .catch(/*Your Error handling if the Message isn't returned, sent, etc.*/);
+            return;
+        }
         const args = message.content.toLowerCase().slice(config.prefix.length).trim().split(/ +/);
 
         console.log(`message sent`);

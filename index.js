@@ -29,7 +29,6 @@ client.on("ready", () => {
 });
 client.on("messageCreate", async message => {
     try {
-
         
         if(message.author.bot) return;
         if(message.content.toLocaleLowerCase().search("ruff ruff") != -1 && message.guildId == "956676648881766440") {
@@ -41,6 +40,7 @@ client.on("messageCreate", async message => {
             message.react('🥶');
         }
 
+        console.log("hi1 " + message);
         if (!message.content.toLowerCase().startsWith(config.prefix)) return;
         
         if (message.guildId == "956676648881766440" && message.channelId != "965098505620299836") {
@@ -51,7 +51,9 @@ client.on("messageCreate", async message => {
                 .catch(/*Your Error handling if the Message isn't returned, sent, etc.*/);
             return;
         }
+        console.group("hi2");
         const args = message.content.toLowerCase().slice(config.prefix.length).trim().split(/ +/);
+
 
         console.log(`message sent`);
         console.log(args);
@@ -124,6 +126,16 @@ client.on("messageCreate", async message => {
             }
             message.channel.send(output);
         }
+        if(args[0] == 'croads' && args[1] == 'brunch') {
+            await fetchMenu.getMenu();
+            let data = (await fetchMenu.getMenu()).crossroads.brunch;
+            
+            let output = "**Crossroads Brunch Menu:**";
+            for(let i = 0; i < data.length; i++ ) {
+                output += "\n" + data[i];
+            }
+            message.channel.send(output);
+        }
         if(args[0] == 'foothill' && args[1] == 'lunch') {
             await fetchMenu.getMenu();
             let data = (await fetchMenu.getMenu()).foothill.lunch;
@@ -149,6 +161,16 @@ client.on("messageCreate", async message => {
             let data = (await fetchMenu.getMenu()).foothill.breakfast;
             
             let output = "**Foothill Breakfast Menu:**";
+            for(let i = 0; i < data.length; i++ ) {
+                output += "\n" + data[i];
+            }
+            message.channel.send(output);
+        }
+        if(args[0] == 'foothill' && args[1] == 'brunch') {
+            await fetchMenu.getMenu();
+            let data = (await fetchMenu.getMenu()).foothill.brunch;
+            
+            let output = "**Foothill Brunch Menu:**";
             for(let i = 0; i < data.length; i++ ) {
                 output += "\n" + data[i];
             }
@@ -184,6 +206,16 @@ client.on("messageCreate", async message => {
             }
             message.channel.send(output);
         }
+        if(args[0] == 'cafe3' && args[1] == 'brunch') {
+            await fetchMenu.getMenu();
+            let data = (await fetchMenu.getMenu()).cafe3.brunch;
+            
+            let output = "**Cafe 3 Brunch Menu:**";
+            for(let i = 0; i < data.length; i++ ) {
+                output += "\n" + data[i];
+            }
+            message.channel.send(output);
+        }
         if(args[0] == 'clarkkerr' && args[1] == 'lunch') {
             await fetchMenu.getMenu();
             let data = (await fetchMenu.getMenu()).clarkkerr.lunch;
@@ -214,9 +246,19 @@ client.on("messageCreate", async message => {
             }
             message.channel.send(output);
         }
+        if(args[0] == 'clarkkerr' && args[1] == 'brunch') {
+            await fetchMenu.getMenu();
+            let data = (await fetchMenu.getMenu()).clarkkerr.brunch;
+            
+            let output = "**Clark Kerr Brunch Menu:**";
+            for(let i = 0; i < data.length; i++ ) {
+                output += "\n" + data[i];
+            }
+            message.channel.send(output);
+        }
     }
     catch(err) {
-        console.log("error! \n" + e);
+        console.log("error! \n");
     }
 })
 

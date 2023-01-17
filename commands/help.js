@@ -5,6 +5,6 @@ module.exports = {
 		.setName('help')
 		.setDescription('helps a poor, clueless soul.'),
 	async execute(interaction) {
-		await interaction.reply('use menu/[dining hall] [time] to see the menu!');
+		await interaction.reply('use menu [dining hall] [time] to see the menu!');
 	},
 };

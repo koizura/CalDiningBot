@@ -64,11 +64,11 @@ client.on("messageCreate", async message => {
 
         }
         if(args[0] == "help") {
-            let output = "**Usage:** `menu/<dininghallname> <time>`"
+            let output = "**Usage:** `menu <dininghallname> <time>`"
                         + "\n**Dining halls:** `croads` `cafe3` `clarkkerr` `foothill`"
                         + "\n**Times:** `breakfast` `lunch` `dinner`"
-                        + "\n**Example:** `menu/cafe3 dinner`"
-                        + "\n**Other:** `menu/ihouse`, `menu/gbc`, `menu/link`, `menu/all`, `menu/invite`"
+                        + "\n**Example:** `menu cafe3 dinner`"
+                        + "\n**Other:** `menu ihouse`, `menu gbc`, `menu link`, `menu all`, `menu invite`"
                         + "\nWhen the command is used for the first time in the day, it will take a few seconds to fetch the data."
                         + "\nCreated by chicken#3413";
             message.channel.send(output);

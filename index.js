@@ -56,30 +56,50 @@ client.on("messageCreate", async message => {
             message.channel.send("force fetching new data...");
             await fetchMenu.update();
             message.channel.send("data has been updated!");
-            
+            return;
         } 
         if(args[0] == 'print') {
             let output = await fetchMenu.getMenu();
             console.log(output);
-
+            return;
         }
         if(args[0] == "help") {
             let output = "**Usage:** `menu <dininghallname> <time>`"
                         + "\n**Dining halls:** `croads` `cafe3` `clarkkerr` `foothill`"
                         + "\n**Times:** `breakfast` `lunch` `dinner`"
                         + "\n**Example:** `menu cafe3 dinner`"
-                        + "\n**Other:** `menu ihouse`, `menu gbc`, `menu link`, `menu all`, `menu invite`"
+                        + "\n**Other:** `menu ihouse`, `menu gbc`, `menu browns`, `menu link`, `menu all`, `menu invite`, `menu hours`, `menu times`"
                         + "\nWhen the command is used for the first time in the day, it will take a few seconds to fetch the data."
                         + "\nCreated by chicken#3413";
             message.channel.send(output);
+            return;
         }
         if(args[0] == "invite") {
             let output = "Invite me to your server with"
                         + "\nhttps://discord.com/oauth2/authorize?client_id=911100218680934451&permissions=0&scope=bot%20applications.commands";
             message.channel.send(output);
+            return;
         }
         if (args[0] == 'link' || args[0] == 'all') {
             message.channel.send("here, if you want to check the menu out yourself: https://caldining.berkeley.edu/menus/");
+            return;
+        }
+        if (args[0] == 'times' || args[0] == 'hours') {
+            message.channel.send("check out the hours of operations of all restaurants here: https://caldining.berkeley.edu/locations/hours-of-operation/");
+            return;
+        }
+        if (args[0] == 'browns') {
+            const output = "**Brown's Breakfast Menu:** (1 Entree + 1 Side + 1 Beverage) " +
+                            "\nEntrees: `turkey sausage burrito`, `vegan burrito, avocado toast`" +
+                            "\nSides: `hash brown patty`, `fruit cup`" +
+                            "\nBeverages: `bubly water`, `hot coffee`, `hot tea`, `milk`, `juice`" +
+                            "\n\n**Brown's Lunch Menu** (1 Protein + 1 Sauce + 2 Sides + 1 Beverage) " +
+                            "\nProtein: `rotisserie tri tip`, `roasted chicken breast`, `seared salmon filet`, `seared tofu`" +
+                            "\nSauce: `chimichurri`, `ancho orange`, `szechuan`" +
+                            "\nSides: `salad seasonal greens`, `garlic fries`, `brown rice`, `heirloom grains`, `vegetable medley`" +
+                            "\nBeverages: `bubly water`, `hot coffee`, `hot tea`, `milk`, `juice`";
+            message.channel.send(output);
+            return;
         }
         if(args[0] == 'gbc') {
             message.channel.send({
@@ -87,9 +107,11 @@ client.on("messageCreate", async message => {
                     attachment: './images/gbc_menu.png',
                     name: 'GBC_MENU.png'
                 }]});
+            return;
         }
         if(args[0] == 'ihouse') {
             message.channel.send("PDF for iHouse menu: https://ihouse.berkeley.edu/sites/default/files/menu.pdf");
+            return;
         }
         if(args[0] == 'croads' && args[1] == 'lunch') {
             await fetchMenu.getMenu();
@@ -111,7 +133,7 @@ client.on("messageCreate", async message => {
             }
             message.channel.send(output);
         }
-        if(args[0] == 'croads' && args[1] == 'breakfast') {
+        else if (args[0] == 'croads' && args[1] == 'breakfast') {
             await fetchMenu.getMenu();
             let data = (await fetchMenu.getMenu()).crossroads.breakfast;
             
@@ -121,7 +143,7 @@ client.on("messageCreate", async message => {
             }
             message.channel.send(output);
         }
-        if(args[0] == 'croads' && args[1] == 'brunch') {
+        else if(args[0] == 'croads' && args[1] == 'brunch') {
             await fetchMenu.getMenu();
             let data = (await fetchMenu.getMenu()).crossroads.brunch;
             
@@ -131,7 +153,7 @@ client.on("messageCreate", async message => {
             }
             message.channel.send(output);
         }
-        if(args[0] == 'foothill' && args[1] == 'lunch') {
+        else if(args[0] == 'foothill' && args[1] == 'lunch') {
             await fetchMenu.getMenu();
             let data = (await fetchMenu.getMenu()).foothill.lunch;
             
@@ -151,7 +173,7 @@ client.on("messageCreate", async message => {
             }
             message.channel.send(output);
         }
-        if(args[0] == 'foothill' && args[1] == 'breakfast') {
+        else if(args[0] == 'foothill' && args[1] == 'breakfast') {
             await fetchMenu.getMenu();
             let data = (await fetchMenu.getMenu()).foothill.breakfast;
             
@@ -161,7 +183,7 @@ client.on("messageCreate", async message => {
             }
             message.channel.send(output);
         }
-        if(args[0] == 'foothill' && args[1] == 'brunch') {
+        else if(args[0] == 'foothill' && args[1] == 'brunch') {
             await fetchMenu.getMenu();
             let data = (await fetchMenu.getMenu()).foothill.brunch;
             
@@ -171,7 +193,7 @@ client.on("messageCreate", async message => {
             }
             message.channel.send(output);
         }
-        if(args[0] == 'cafe3' && args[1] == 'lunch') {
+        else if(args[0] == 'cafe3' && args[1] == 'lunch') {
             await fetchMenu.getMenu();
             let data = (await fetchMenu.getMenu()).cafe3.lunch;
             
@@ -181,7 +203,7 @@ client.on("messageCreate", async message => {
             }
             message.channel.send(output);
         }
-        if(args[0] == 'cafe3' && args[1] == 'dinner') {
+        else if(args[0] == 'cafe3' && args[1] == 'dinner') {
             await fetchMenu.getMenu();
             let data = (await fetchMenu.getMenu()).cafe3.dinner;
             
@@ -191,7 +213,7 @@ client.on("messageCreate", async message => {
             }
             message.channel.send(output);
         }
-        if(args[0] == 'cafe3' && args[1] == 'breakfast') {
+        else if(args[0] == 'cafe3' && args[1] == 'breakfast') {
             await fetchMenu.getMenu();
             let data = (await fetchMenu.getMenu()).cafe3.breakfast;
             
@@ -201,7 +223,7 @@ client.on("messageCreate", async message => {
             }
             message.channel.send(output);
         }
-        if(args[0] == 'cafe3' && args[1] == 'brunch') {
+        else if(args[0] == 'cafe3' && args[1] == 'brunch') {
             await fetchMenu.getMenu();
             let data = (await fetchMenu.getMenu()).cafe3.brunch;
             
@@ -211,7 +233,7 @@ client.on("messageCreate", async message => {
             }
             message.channel.send(output);
         }
-        if(args[0] == 'clarkkerr' && args[1] == 'lunch') {
+        else if(args[0] == 'clarkkerr' && args[1] == 'lunch') {
             await fetchMenu.getMenu();
             let data = (await fetchMenu.getMenu()).clarkkerr.lunch;
             
@@ -221,7 +243,7 @@ client.on("messageCreate", async message => {
             }
             message.channel.send(output);
         }
-        if(args[0] == 'clarkkerr' && args[1] == 'dinner') {
+        else if(args[0] == 'clarkkerr' && args[1] == 'dinner') {
             await fetchMenu.getMenu();
             let data = (await fetchMenu.getMenu()).clarkkerr.dinner;
             
@@ -231,7 +253,7 @@ client.on("messageCreate", async message => {
             }
             message.channel.send(output);
         }
-        if(args[0] == 'clarkkerr' && args[1] == 'breakfast') {
+        else if(args[0] == 'clarkkerr' && args[1] == 'breakfast') {
             await fetchMenu.getMenu();
             let data = (await fetchMenu.getMenu()).clarkkerr.breakfast;
             
@@ -241,7 +263,7 @@ client.on("messageCreate", async message => {
             }
             message.channel.send(output);
         }
-        if(args[0] == 'clarkkerr' && args[1] == 'brunch') {
+        else if(args[0] == 'clarkkerr' && args[1] == 'brunch') {
             await fetchMenu.getMenu();
             let data = (await fetchMenu.getMenu()).clarkkerr.brunch;
             

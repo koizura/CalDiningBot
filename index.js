@@ -32,11 +32,11 @@ client.on("messageCreate", async message => {
         
         if(message.author.bot) return;
         if(message.content.toLocaleLowerCase().search("ruff ruff") != -1 && message.guildId == "956676648881766440") {
-            console.log("Ruff Ruff");
+            console.log("Ruff Ruff by " + message.author.username);
             message.react('💀');
         }
         if(message.content.toLocaleLowerCase().search("nyaa") != -1 && message.guildId == "956676648881766440") {
-            console.log("nyaa");
+            console.log("nyaa by " + message.author.username);
             message.react('🥶');
         }
 

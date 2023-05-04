@@ -39,12 +39,23 @@ client.on("messageCreate", async message => {
             console.log("nyaa by " + message.author.username);
             message.react('🥶');
         }
+        
 
         // console.log("hi1 " + message);
         if (!message.content.toLowerCase().startsWith(config.prefix) && !message.content.toLowerCase().startsWith(config.prefix2)) return;
         
+        // cal 26 server
         if (message.guildId == "956676648881766440" && message.channelId != "965098505620299836") {
             message.reply('please use <#965098505620299836> for menu commands.')
+                .then(msg => {
+                    setTimeout(() => msg.delete(), 3000)
+                })
+                .catch(/*Your Error handling if the Message isn't returned, sent, etc.*/);
+            return;
+        }
+        // celtic studies server
+        if (message.guildId == "1014626230550663218" && message.channelId != "1103820967043682314") {
+            message.reply('please use <#1103820967043682314> for menu commands.')
                 .then(msg => {
                     setTimeout(() => msg.delete(), 3000)
                 })

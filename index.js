@@ -62,6 +62,14 @@ client.on("messageCreate", async message => {
                 .catch(/*Your Error handling if the Message isn't returned, sent, etc.*/);
             return;
         }
+
+        // check for permissions 
+        if (!message.channel.permissionsFor(client.user, true).has("SEND_MESSAGES")) {
+            return;
+        }
+
+
+
         const args = message.content.toLowerCase().slice(config.prefix.length).trim().split(/ +/);
         if(args[0] == 'fetch') {
             message.channel.send("force fetching new data...");

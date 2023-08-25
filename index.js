@@ -27,7 +27,7 @@ for (const file of commandFiles) {
 
 
 client.on("ready", () => {
-    console.log(`Ready! Logged in as ${client.user.tag}`);
+    console.log(`...................\nReady! Logged in as ${client.user.tag}`);
     client.user.setActivity('to menu/help', { type: 'LISTENING' });
 });
 client.on("messageCreate", async message => {
@@ -70,6 +70,7 @@ client.on("messageCreate", async message => {
         if (!message.channel.permissionsFor(client.user, true).has("SEND_MESSAGES")) {
             return;
         }
+        console.log(message.author.username + " in " + message.guild.name + ": " + message.content);
 
 
 

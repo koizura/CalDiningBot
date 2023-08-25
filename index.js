@@ -8,7 +8,10 @@ dotenv.config();
 // Require the necessary discord.js classes
 const { Client, Collection, Intents } = require('discord.js');
 // Create a new client instance
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({ 
+    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+    restRequestTimeout: 60000
+});
 
 client.commands = new Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
